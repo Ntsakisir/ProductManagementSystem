@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         $products = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select('products.*' ,'bids.product_id' ,'bids.price')
+        ->select('products.*' ,'bids.product_id')
         ->get();
         //max bid
         $results = DB::table('products')
