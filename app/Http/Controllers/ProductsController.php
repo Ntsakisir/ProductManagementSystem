@@ -85,32 +85,32 @@ class ProductsController extends Controller
         //max bid amount
         $price = DB::table('bids')
                 //->where('id', $id)
-                ->max('price');
+                ->max('bid_price');
         
                 //min bid amount
         $mini = DB::table('bids')
         //->where('product_id', $id)
-        ->min('price');
+        ->min('bid_price');
 
         $counto = DB::table('bids')
         ->where('product_id', $id)
-        ->count('price');
+        ->count('bid_price');
 
         //total number of bids
         $tot = DB::table('bids')
         //->where('product_id', $id)
-        ->count('price');
+        ->count('bid_price');
 
         //count bids per product
         $counto = DB::table('bids')
         ->where('product_id', $id)
-        ->count('price');
+        ->count('bid_price');
 
         //avg bid
 
         $avg = DB::table('bids')
         //->where('product_id', $id)
-        ->avg('price');
+        ->avg('bid_price');
 
         
         // echo $avg;
