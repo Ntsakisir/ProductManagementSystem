@@ -51,15 +51,15 @@ class BidController extends Controller
     {
           //save form data into the database
           $this->validate($request,[
-            'email'=>'required',
-            'price'=>'required'
+            'u_email'=>'required',
+            'bid_price'=>'required'
         ]);
         
         //make a bid
 
         $bid = new Bids;
-        $bid->email = $request->input('email');
-        $bid->price = $request->input('price'); 
+        $bid->u_email = $request->input('u_email');
+        $bid->bid_price = $request->input('bid_price'); 
         $bid->product_id = $request->input('product_id');
         $bid->save();
 
