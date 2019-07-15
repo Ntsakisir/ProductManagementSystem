@@ -28,13 +28,13 @@ Route::post('/create', 'BidController@store');
 
 //route for adding a product
 
-Route::post('/create', 'ProductsController@store');
+Route::post('/add', 'ProductsController@store');
 
 
 Route::put('products/update', 'ProductsController@update');
 
 //route for deleting a product
-Route::put('products/destroy', 'ProductsController@destroy');
+Route::delete('products/destroy', 'ProductsController@destroy');
 
 //Routing to the Products Controller 
 
@@ -49,7 +49,7 @@ Route::resource('products', 'ProductsController');
 
 Route::resource('average', 'ProductsController');
 
-Route::resource('bids', 'ProductsController');
+//Route::resource('bids', 'ProductsController');
 
 
 Route::get('/create', 'BidController@store')->name('create');
