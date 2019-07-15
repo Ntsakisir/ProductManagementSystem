@@ -20,6 +20,7 @@
                     <p><span>Highest Bid:</span>{{$price}}</p>
                     <p><span>Average:</span>{{$avg}}</p>
                     <p><span>Your Bid:</span>{{$avg}}</p>
+                    <p><span>Views:</span> {{$products->views}}</p>
                   <hr>
                     </div>
                   </div>
