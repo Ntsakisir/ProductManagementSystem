@@ -75,6 +75,10 @@ class ProductsController extends Controller
     {
         //get a single product by id
         $products = Product::find($id);
+       $views = DB::table('products')
+          ->where('id',$id)
+        ->increment('views',1);
+
         //$products->increment('views');
         //$pbids = Bids::all();
 
@@ -118,7 +122,7 @@ class ProductsController extends Controller
         //$price = Bids::max('price');
    
         //return view('home')->with('products_list' ,$price);
-        return view('products.show',compact('products' ,'avg','price','mini','counto','tot'));
+        return view('products.show',compact('products' ,'avg','price','mini','counto','tot','views'));
         //return view('products.product')->with('average',$avg);
         // echo $counto;
         // echo $mini;
