@@ -4,7 +4,7 @@
 
 <h3 style="text-align:center;" class="card-header">{{ __('Add Product') }}</h3>
 <div class="card-body">
-<form method="POST" action="{{url('/create')}}" aria-label="{{ __('Register') }}">
+<form method="POST" action="{{url('/add')}}" aria-label="{{ __('Register') }}">
         @csrf
 
         <div class="form-group row">
