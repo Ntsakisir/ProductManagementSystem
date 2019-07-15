@@ -34,31 +34,31 @@ class HomeController extends Controller
 
         $products = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select('products.*' ,'bids.product_id')
+        ->select('products.*' ,'bids.product_id','bids.bid_price')
         ->get();
         //max bid
         $results = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select(DB::raw('max(bids.price) AS max_bid'))
+        ->select(DB::raw('max(bids.bid_price) AS max_bid'))
         ->groupBy('products.id')
         ->first();
         //min bid
         $minimum = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select(DB::raw('min(bids.price) AS min_bid'))
+        ->select(DB::raw('min(bids.bid_price) AS min_bid'))
         ->groupBy('products.id')
         ->first();
         //average
         $average = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select(DB::raw('avg(bids.price) AS avg_bid'))
+        ->select(DB::raw('avg(bids.bid_price) AS avg_bid'))
         ->groupBy('products.id')
         ->first(3);
 
         //total bids
         $total = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select(DB::raw('count(bids.price) AS tot_bid'))
+        ->select(DB::raw('count(bids.bid_price) AS tot_bid'))
         ->groupBy('products.id')
         ->first();
 
@@ -74,38 +74,38 @@ class HomeController extends Controller
         //$pbids = Bids::all();
         $highestBid = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select('products.*' ,'bids.price' ,DB::raw('max(bids.price) AS max_bid') ,'bids.product_id')
+        ->select('products.*' ,'bids.bid_price' ,DB::raw('max(bids.bid_price) AS max_bid') ,'bids.product_id')
         ->get();
 
         //max bid amount
         $price = DB::table('bids')
                 //->where('id', $id)
-                ->max('price');
+                ->max('bid_price');
         
                 //min bid amount
         $mini = DB::table('bids')
         //->where('product_id', $id)
-        ->min('price');
+        ->min('bid_price');
 
         $counto = DB::table('bids')
         ->where('product_id', $id)
-        ->count('price');
+        ->count('bid_price');
 
         //total number of bids
         $tot = DB::table('bids')
         //->where('product_id', $id)
-        ->count('price');
+        ->count('bid_price');
 
         //count bids per product
         $counto = DB::table('bids')
         ->where('product_id', $id)
-        ->count('price');
+        ->count('bid_price');
 
         //avg bid
 
         $avg = DB::table('bids')
         //->where('product_id', $id)
-        ->avg('price');
+        ->avg('bid_price');
 
         
         echo $avg;
