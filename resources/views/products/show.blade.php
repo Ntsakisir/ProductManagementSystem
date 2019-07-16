@@ -10,7 +10,7 @@
                   <h2 style="text-align:center">{{$products->name}}</h2>
                   <div class="row">
                     <div class="col-md-7">
-                        <p> <img src="http://placehold.it/400x250/000/fff" alt="product"/> </p>       
+                        <p> <img src="{{ asset('uploads/img/' . $products->image) }}" width="400px" height="auto;" alt="product"/> </p>       
                     </div>
                     <div class="col-md-4">     
                   
@@ -24,21 +24,6 @@
                   <hr>
                     </div>
                   </div>
-              {{--     @if(count($pbids) > 0)
-
-                    @foreach ($pbids as $bid)
-                    
-                    <p> {{$bid->price}}</p>
-                    
-                    @endforeach
-                    
-                    
-                    @else
-                    
-                    <p>No Products to Display!!!</p>
-                    
-                    
-                    @endif --}}
                 
                   <h3 style="text-align:center;" class="card-header">{{ __('Place A Bid') }}</h3>
                   <div class="card-body">
