@@ -23,7 +23,7 @@
                         <div class="col-md-4 ">
                                 <div class="card mb-4 shadow-sm">
                                     <div class="img-event">
-                                        <img class="group list-group-image img-fluid" src="images/pro.jpg" alt="" />
+                                        <img class="group list-group-image img-fluid" src="{{ asset('uploads/img/' . $product->image) }}" alt="" />
                                     </div>
                                   <div class="card-body">
                                     <p class="card-text">{{$product->description}}</p>
