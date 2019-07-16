@@ -41,27 +41,31 @@ class HomeController extends Controller
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
         ->select(DB::raw('max(bids.bid_price) AS max_bid'))
         ->groupBy('products.id')
-        ->first();
+        ->get();
+
+
+
+
         //min bid
         $minimum = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
         ->select(DB::raw('min(bids.bid_price) AS min_bid'))
         ->groupBy('products.id')
-        ->first();
+        ->get();
         //average
         $average = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
         ->select(DB::raw('avg(bids.bid_price) AS avg_bid'))
         ->groupBy('products.id')
-        ->first(3);
+        ->get();
 
         //total bids
         $total = DB::table('products')
         ->leftJoin('bids','products.id' , '=', 'bids.product_id')
-        ->select(DB::raw('count(bids.bid_price) AS tot_bid'))
+        ->select(DB::raw('count(bids.bid_price) AS tot_bid '))
         ->groupBy('products.id')
-        ->first();
-
+        ->get();
+        
         return view('home',compact('products' ,'results' ,'minimum' ,'average' ,'total'));
        // return view('home')->with('products' ,$joined);
     }
