@@ -55,7 +55,7 @@
               <table class="table table-striped table-sm">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>image</th>
                     <th>ID</th>
                     <th>NAME</th>
                     <th>SKU</th>
@@ -66,57 +66,57 @@
                     <th>AVG BID</th>
                     <th>HIGHEST BID</th>
                     <th>LOWEST BID</th>
+                    
                     <th colspan="4">ACTION</th>
                   </tr>
                 </thead>
                 <tbody>
                      @if(count($products) > 0)
                         @foreach ($products as $product)
-                  <tr>
-                    <td></td>
-                    <td>{{$product->id}}</td>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->SKU}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->description}}</td>
-                    <td>{{$product->views}}</td>
-                    
-                  @foreach ($total as $item)
-                  <td>{{$item}}</td>
-                      
+                          <tr>
+                          <td><img src="{{ asset('uploads/img/' . $product->image) }}" width="100px;" height="100px;" alt="hello"></td>
+                          <td>{{$product->id}}</td>
+                          <td>{{$product->name}}</td>
+                          <td>{{$product->SKU}}</td>
+                          <td>{{$product->price}}</td>
+                          <td>{{$product->description}}</td>
+                          <td>{{$product->views}}</td>
+                  @foreach (json_decode($total ,true) as $item)
+                    <td>{{$item['tot_bid']}}</td>
                   @endforeach
-                  @foreach ($average as $item)
-                  <td>{{$item}}</td>
+                  
+                  @foreach (json_decode($average ,true) as $item)
+                  <td>{{$item['avg_bid']}}</td>
                       
                   @endforeach
                 
-                  @foreach ($results as $item)
-                  <td>{{$item}}</td>
+                  @foreach (json_decode($results , true) as $item)
+                  <td>{{$item['max_bid']}}</td>
                   @endforeach
                   
-                  @foreach ($minimum as $item)
-                  <td>{{$item}}</td>
+                  @foreach (json_decode($minimum ,true) as $item)
+                  <td>{{$item['min_bid']}}</td>
                       
                   @endforeach
-                  
-                  <td><a href="/products/create" class="btn btn-success"> <span data-feather="file-plus"></span>Add</a></td>
-                  <td><a href="/products/{{$product->id}}" class="btn btn-info"> <span data-feather="image"></span>View</a></td>
-                  <td><a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a></td>
-                  <td><a href="/products/{{$product->id}}/destroy"class="btn btn-danger" > <span data-feather="trash"></span>Delete</a></td>
-
-                  </tr>
-                    @endforeach
-                    @else
-
-                     <p class="alert alert-warning">No PRODUCTS TO DISPLAY!!!</p>
+                              <td><a href="/products/create" class="btn btn-success"> <span data-feather="file-plus"></span>Add</a></td>
+                              <td><a href="/products/{{$product->id}}" class="btn btn-info"> <span data-feather="image"></span>View</a></td>
+                              <td><a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a></td>
+                                      <td>  <form  method="POST" action="{{route('products.destroy',['id'=>$product->id])}}">
+                        @method('delete')
+                        @csrf
+                            <div>
+                                        <input hidden id="{{$product->id}}" type="text" name="{{$product->id}}" value="{{$product->id}}" required autofocus>
+                                    </div>
+                        <button type="submit" class="btn btn-danger"><span data-feather="trash"></span>
+                                {{ __('Delete') }}
+                            </button>
+                    </form></td>
+                            </tr>
+               @endforeach
+                   @else
+                      <p class="alert alert-warning">No PRODUCTS TO DISPLAY!!!</p>
                    @endif
-                   
-
-                   
-                  
-                    
-                
-                 
+            
                 </tbody>
               </table>
             </div>
