@@ -4,7 +4,7 @@
 
 <h3 style="text-align:center;" class="card-header">{{ __('Add Product') }}</h3>
 <div class="card-body">
-<form method="POST" action="{{url('/add')}}" aria-label="{{ __('Register') }}">
+<form method="POST" action="{{url('/add')}}" aria-label="{{ __('Register') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group row">
@@ -60,6 +60,19 @@
                 @endif
             </div>
         </div>
+        <div class="form-group row">
+                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('upload image') }}</label>
+    
+                <div class="col-md-6">
+                    <input id="image" type="file" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" value="" required autofocus>
+    
+                    @if ($errors->has('image'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('image') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
         <div class="form-group row mb-0">
             <div class="col-md-6 offset-md-4">
