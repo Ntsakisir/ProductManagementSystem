@@ -50,7 +50,8 @@ class ProductsController extends Controller
             'name'=>'required',
             'SKU'=>'required',
             'price'=>'required',
-            'description'=>'required'
+            'description'=>'required',
+            'image'=>'required|image|memes:jpeg,png,jpg,gif|max:2048'
         ]);
         
         //make a bid
@@ -60,6 +61,19 @@ class ProductsController extends Controller
         $product->SKU = $request->input('SKU'); 
         $product->price = $request->input('price');
         $product->description = $request->input('description');
+        if($request->hasfile('image')){
+            $file = $request->file('image');
+            $new_name = rand().''.$file->getClientOriginalExtension();
+           /*  $extension = $file->getClientOriginalExtension();
+            $filename = time().''.$extension; */
+            $file->move(public_path('uploads/img/') ,$new_name);
+            $product->image = $new_name;
+        }
+        else{
+            return $request;
+            $product->image = '';
+        }
+
         $product->save();
 
         return redirect('/products')->with('success','Product Added Successfully!!!');
@@ -75,6 +89,7 @@ class ProductsController extends Controller
     {
         //get a single product by id
         $products = Product::find($id);
+
        $views = DB::table('products')
           ->where('id',$id)
         ->increment('views',1);
